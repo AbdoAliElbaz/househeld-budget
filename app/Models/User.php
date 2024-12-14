@@ -57,4 +57,9 @@ class User extends Authenticatable
             ->withPivot('is_owner')
             ->wherePivot('is_owner', true);
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }

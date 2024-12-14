@@ -35,4 +35,9 @@ class Budget extends Model
             ->wherePivot('is_owner', true)
             ->first();
     }
+
+    public function transactions()
+    {
+        return $this->hasMany(Transaction::class);
+    }
 }
