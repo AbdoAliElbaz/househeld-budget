@@ -20,6 +20,19 @@ class Budget extends Model
 
     public function users()
     {
-        return $this->belongsToMany(User::class);
+        return $this->belongsToMany(User::class)->withPivot('is_owner');
+    }
+
+    public function categories()
+    {
+        return $this->hasMany(Category::class);
+    }
+
+    public function owner()
+    {
+        return $this->belongsToMany(User::class)
+            ->withPivot('is_owner')
+            ->wherePivot('is_owner', true)
+            ->first();
     }
 }

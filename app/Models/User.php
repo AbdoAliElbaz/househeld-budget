@@ -48,6 +48,13 @@ class User extends Authenticatable
 
     public function budgets()
     {
-        return $this->belongsToMany(Budget::class);
+        return $this->belongsToMany(Budget::class)->withPivot('is_owner');
+    }
+
+    public function ownedBudgets()
+    {
+        return $this->belongsToMany(Budget::class)
+            ->withPivot('is_owner')
+            ->wherePivot('is_owner', true);
     }
 }
