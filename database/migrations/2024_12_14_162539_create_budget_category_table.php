@@ -11,14 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('user_budget', function (Blueprint $table) {
+        Schema::create('budget_category', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('budget_id');
-            $table->boolean('is_owner')->default(false);
-            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedBigInteger('category_id');
             $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
-            $table->unique(['budget_id', 'is_owner'], 'unique_budget_owner')->where('is_owner', true);
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->timestamps();
         });
     }
@@ -28,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('user_budget');
+        Schema::dropIfExists('budget_category');
     }
 };
