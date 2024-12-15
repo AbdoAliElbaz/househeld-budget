@@ -77,5 +77,61 @@ class CategorySeeder extends Seeder
         foreach ($incomeChildren as $child) {
             Category::create($child);
         }
+
+        $expense = Category::create([
+            'name' => 'Expense',
+            'type' => 'expense',
+            'parent_id' => null,
+            'logo' => null,
+            'order' => 0,
+            'description' => 'expense'
+        ]);
+        $expenseChildren =      [
+            [
+                'name' => 'Food',
+                'type' => 'expense',
+                'parent_id' => $expense->id,
+                'logo' => null,
+                'order' => 0,
+                'description' => 'food'
+            ],
+            [
+                'name' => 'Clothing',
+                'type' => 'expense',
+                'parent_id' => $expense->id,
+                'logo' => null,
+                'order' => 0,
+                'description' => 'clothing'
+            ],
+            [
+                'name' => 'Entertainment',
+                'type' => 'expense',
+                'parent_id' => $expense->id,
+                'logo' => null,
+                'order' => 0,
+                'description' => 'entertainment'
+            ],
+            [
+                'name' => 'Health',
+                'type' => 'expense',
+                'parent_id' => $expense->id,
+                'logo' => null,
+                'order' => 0,
+                'description' => 'health'
+            ],
+            [
+
+                'name' => 'Other',
+                'type' => 'expense',
+                'parent_id' => $expense->id,
+                'logo' => null,
+                'order' => 0,
+                'description' => 'other'
+            ],
+        ];
+
+        foreach ($expenseChildren as $child) {
+            Category::create($child);
+        }
     }
 }

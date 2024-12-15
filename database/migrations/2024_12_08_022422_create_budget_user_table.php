@@ -11,19 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('transactions', function (Blueprint $table) {
+        Schema::create('budget_user', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id');
             $table->unsignedBigInteger('budget_id');
-            $table->unsignedBigInteger('category_id');
-            $table->string('description');
-            $table->decimal('amount', 10, 2);
-            $table->date('date');
-            $table->enum('type', ['expense', 'income']);
-            $table->boolean('is_recurring')->default(false);
+            $table->boolean('is_owner')->default(false);
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->foreign('budget_id')->references('id')->on('budgets')->onDelete('cascade');
-            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->unique(['budget_id', 'is_owner'], 'unique_budget_owner')->where('is_owner', true);
             $table->timestamps();
         });
     }
@@ -33,6 +28,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('transactions');
+        Schema::dropIfExists('user_budget');
     }
 };

@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('budgets', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description');
+            $table->string('description')->nullable();
             $table->enum('type', ['personal', 'household', 'company', 'other']);
             $table->string('created_by');
             $table->string('currency');
