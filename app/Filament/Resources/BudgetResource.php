@@ -9,6 +9,7 @@ use Filament\Forms;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Actions\Action;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
@@ -38,6 +39,10 @@ class BudgetResource extends Resource
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
+                Action::make('transactions')
+                    ->label('Manage Transactions')
+                    ->url(fn($record) => route('filament.admin.resources.budgets.transactions', $record))
+                    ->icon('heroicon-o-calculator'),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([
@@ -59,6 +64,7 @@ class BudgetResource extends Resource
             'index' => Pages\ListBudgets::route('/'),
             'create' => Pages\CreateBudget::route('/create'),
             'edit' => Pages\EditBudget::route('/{record}/edit'),
+            'transactions' => Pages\ManageTransactions::route('/{record}/transactions'),
         ];
     }
 }

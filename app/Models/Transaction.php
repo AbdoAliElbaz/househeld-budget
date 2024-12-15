@@ -11,6 +11,7 @@ class Transaction extends Model
     protected $fillable = [
         'user_id',
         'budget_id',
+        'row_id',
         'category_id',
         'description',
         'amount',
@@ -32,5 +33,9 @@ class Transaction extends Model
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+    public function getAmountAttribute($value)
+    {
+        return number_format($value, 2);
     }
 }

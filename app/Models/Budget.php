@@ -25,7 +25,7 @@ class Budget extends Model
 
     public function categories()
     {
-        return $this->hasMany(Category::class);
+        return $this->belongsToMany(Category::class);
     }
 
     public function owner()
@@ -39,5 +39,10 @@ class Budget extends Model
     public function transactions()
     {
         return $this->hasMany(Transaction::class);
+    }
+
+    public function rows()
+    {
+        return $this->hasMany(BudgetRow::class);
     }
 }
